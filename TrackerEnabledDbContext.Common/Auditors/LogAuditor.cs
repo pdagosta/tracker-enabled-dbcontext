@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using TrackerEnabledDbContext.Common.Configuration;
@@ -22,7 +23,7 @@ namespace TrackerEnabledDbContext.Common.Auditors
         {
         }
 
-        internal AuditLog CreateLogRecord(object userName, EventType eventType, ITrackerContext context)
+        internal AuditLog CreateLogRecord(object userName, EventType eventType, IDbContext context)
         {
             Type entityType = _dbEntry.Entity.GetType().GetEntityType();
 

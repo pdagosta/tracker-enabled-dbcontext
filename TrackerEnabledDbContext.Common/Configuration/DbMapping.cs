@@ -13,7 +13,7 @@ namespace TrackerEnabledDbContext.Common.Configuration
         private readonly IEntityMap _entityMap;
         private readonly Type _entityType;
 
-        internal DbMapping(ITrackerContext context, Type entityType)
+        internal DbMapping(IDbContext context, Type entityType)
         {
             _entityType = entityType;
             _entityMap = (context as DbContext).Db(_entityType);

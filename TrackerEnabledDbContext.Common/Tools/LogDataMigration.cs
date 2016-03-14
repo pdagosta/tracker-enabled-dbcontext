@@ -13,9 +13,9 @@ namespace TrackerEnabledDbContext.Common.Tools
 {
     public class LogDataMigration
     {
-        private readonly ITrackerContext _trackerContext;
+        private readonly ITrackerOnlyContext _trackerContext;
 
-        public LogDataMigration(ITrackerContext trackerContext)
+        public LogDataMigration(ITrackerOnlyContext trackerContext)
         {
             if(trackerContext == null) throw new ArgumentNullException(nameof(trackerContext));
             _trackerContext = trackerContext;

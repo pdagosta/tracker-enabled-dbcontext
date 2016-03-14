@@ -77,9 +77,12 @@
     <Compile Include="Configuration\TrackAllResponse.cs" />
     <Compile Include="Configuration\TrackingConfigurationPriority.cs" />
     <Compile Include="Configuration\TrackingConfigurationValue.cs" />
+    <Compile Include="CoreTrackerContext.cs" />
     <Compile Include="EventArgs\AuditLogGeneratedEventArgs.cs" />
     <Compile Include="Extensions\EntityTypeConfigurationExtensions.cs" />
     <Compile Include="Interfaces\ILogDetailsAuditor.cs" />
+    <Compile Include="Interfaces\ITrackingContext.cs" />
+    <Compile Include="Interfaces\ITrackerContext.cs" />
     <Compile Include="Interfaces\IUnTrackable.cs" />
     <Compile Include="Attributes\SkipTrackingAttribute.cs" />
     <Compile Include="Attributes\TrackChangesAttribute.cs" />
@@ -91,7 +94,7 @@
     <Compile Include="CoreTracker.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="Interfaces\IDbContext.cs" />
-    <Compile Include="Interfaces\ITrackerContext.cs" />
+    <Compile Include="Interfaces\ITrackerOnlyContext.cs" />
     <Compile Include="Auditors\LogAuditor.cs" />
     <Compile Include="Auditors\ChangeLogDetailsAuditor.cs" />
     <Compile Include="Models\AuditLog.cs" />
@@ -103,7 +106,7 @@
     <Compile Include="Tools\NameChangedEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config">
+    <None Include="Tools\App.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="MyKey.snk" />

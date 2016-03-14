@@ -11,7 +11,7 @@ namespace TrackerEnabledDbContext.Common.Testing.Extensions
 {
     public static class AuditAssertExtensions
     {
-        public static T AssertAuditForAddition<T>(this T entity, ITrackerContext db, object entityId,
+        public static T AssertAuditForAddition<T>(this T entity, ITrackerOnlyContext db, object entityId,
             string userName = null, params Expression<Func<T, object>>[] propertyExpressions)
         {
             IEnumerable<AuditLog> logs = db.GetLogs<T>(entityId)
@@ -36,7 +36,7 @@ namespace TrackerEnabledDbContext.Common.Testing.Extensions
             return entity;
         }
 
-        public static T AssertAuditForDeletion<T>(this T entity, ITrackerContext db, object entityId,
+        public static T AssertAuditForDeletion<T>(this T entity, ITrackerOnlyContext db, object entityId,
             string userName = null, params Expression<Func<T, object>>[] oldValueProperties)
         {
             IEnumerable<AuditLog> logs = db.GetLogs<T>(entityId)
@@ -60,19 +60,19 @@ namespace TrackerEnabledDbContext.Common.Testing.Extensions
             return entity;
         }
 
-        public static T AssertAuditForSoftDeletion<T>(this T entity, ITrackerContext db, object entityId,
+        public static T AssertAuditForSoftDeletion<T>(this T entity, ITrackerOnlyContext db, object entityId,
             string userName = null, params AuditLogDetail[] logdetails)
         {
             return AssertChange(entity, db, entityId, userName, EventType.SoftDeleted, logdetails);
         }
 
-        public static T AssertAuditForUndeletion<T>(this T entity, ITrackerContext db, object entityId,
+        public static T AssertAuditForUndeletion<T>(this T entity, ITrackerOnlyContext db, object entityId,
             string userName = null, params AuditLogDetail[] logdetails)
         {
             return AssertChange(entity, db, entityId, userName, EventType.UnDeleted, logdetails);
         }
 
-        private static T AssertChange<T>(T entity, ITrackerContext db, object entityId, string userName, EventType eventType,
+        private static T AssertChange<T>(T entity, ITrackerOnlyContext db, object entityId, string userName, EventType eventType,
             AuditLogDetail[] logdetails)
         {
             var logs = db.GetLogs<T>(entityId)
@@ -102,13 +102,13 @@ namespace TrackerEnabledDbContext.Common.Testing.Extensions
             return entity;
         }
 
-        public static T AssertAuditForModification<T>(this T entity, ITrackerContext db, object entityId,
+        public static T AssertAuditForModification<T>(this T entity, ITrackerOnlyContext db, object entityId,
             string userName = null, params AuditLogDetail[] logdetails)
         {
             return AssertChange(entity, db, entityId, userName, EventType.Modified, logdetails);
         }
 
-        public static T AssertNoLogs<T>(this T entity, ITrackerContext db, object entityId)
+        public static T AssertNoLogs<T>(this T entity, ITrackerOnlyContext db, object entityId)
         {
             var logs = db.GetLogs<T>(entityId);
             logs.AssertCount(0, "Logs found when logs were not expected");
@@ -116,7 +116,7 @@ namespace TrackerEnabledDbContext.Common.Testing.Extensions
             return entity;
         }
 
-        public static T AssertNoLogs<T>(this T entity, ITrackerContext db, object entityId, EventType eventType)
+        public static T AssertNoLogs<T>(this T entity, ITrackerOnlyContext db, object entityId, EventType eventType)
         {
             var logs = db.GetLogs<T>(entityId)
                 .Where(x=>x.EventType == eventType);
